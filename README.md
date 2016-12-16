@@ -3,7 +3,7 @@ Using luajit instead of lua for apache24 module mod_lua
 
 ## depends
 - MS Build Tools 2015.3 (https://www.microsoft.com/en-us/download/details.aspx?id=48159)
-- apache24 (httpd 24.23.0 windows vc14)
+- apache24 (httpd 2.4.23.0 windows vc14)
 - lua-5.1.5.tar.gz
 - LuaJIT-2.0.4.zip
 
