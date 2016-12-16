@@ -1,0 +1,43 @@
+# sudo apt-get install apache2-dev
+# sudo apt-get install libluajit-dev
+#
+#/etc/apache2/sites-enables/000-default.conf
+#
+#    <Files "*.lua">
+#        SetHandler lua-script
+#    </Files>
+#
+#    <Location /lua>
+#        DirectoryIndex index.lua
+#    </Location>
+#
+
+
+ROOT_PATH		= .
+OBJS_PATH		= ./objs
+TARGET_PATH		= .
+
+SRCS = mod_lua.c \
+	   lua_apr.c lua_config.c lua_dbd.c \
+	   lua_passwd.c lua_request.c lua_vmprep.c
+
+all:$(SRCS)
+	apxs -c \
+		-n lua \
+		-o mod_luajit.so \
+		$(shell pkg-config --cflags --libs luajit) \
+		$^
+
+install:
+	apxs -i -a -n lua .libs/mod_luajit.so 
+		
+
+clean:
+	rm -rf $(OBJS_PATH)
+
+cleanall:clean
+	rm -rf *.so
+	rm -rf *.lo
+	rm -rf *.slo
+	rm -rf .libs
+
